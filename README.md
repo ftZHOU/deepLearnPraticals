@@ -10,5 +10,7 @@
  ![Deep1](https://github.com/ftZHOU/readmePicture/blob/master/deep_1.png)
 
 2. Same model with normalization (lamda layer)   
+ ![Deep2](https://github.com/ftZHOU/readmePicture/blob/master/deep_2.png)
 
 3. Two hidden layers (Dense+relu) + One output layer (softmax)
+ ![Deep3](https://github.com/ftZHOU/readmePicture/blob/master/deep_3.png)
