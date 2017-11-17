@@ -80,7 +80,10 @@ print('Test accuracy:', score[1])
 
 
 
+import sys
 
+
+print(sys.path)
 
 
 
