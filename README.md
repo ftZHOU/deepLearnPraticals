@@ -23,7 +23,9 @@
                 x = Dense(hidden1)(x)
                 x = Activation('relu')(x)
                 x = Dropout(0.5)(x)
-    Test loss: 0.0925885819901  Test accuracy: 0.9746                                                                                                                                                                                                                                                                                                
+    Test loss: 0.0925885819901  Test accuracy: 0.9746  
+ ![Deep3](https://github.com/ftZHOU/readmePicture/blob/master/deep_4.png)  
+
 
 
 
