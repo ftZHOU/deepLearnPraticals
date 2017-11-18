@@ -8,6 +8,7 @@ from keras.callbacks import ModelCheckpoint
 import h5py
 from keras.models import load_model
 import sys
+from keras import regulatizers
 
 
 print(sys.path)

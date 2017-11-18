@@ -10,6 +10,8 @@ from keras.callbacks import ModelCheckpoint
 import h5py
 from keras.models import load_model
 from keras.layers import Lambda
+from keras import regularizers
+from keras.layers import Dropout
 
 # this code run in python 3.5 for tensorflow but my python is 3.6 so manually add a h5py path 
 
@@ -42,10 +44,21 @@ mean = X_train.mean(axis=0)
 std = X_train.std(axis=0) + 1e-5
 xl = Lambda(lambda image, mu, std: (image - mu) / std,
            arguments={'mu': mean, 'std': std})(xi)
-x = Dense(256)(xl)  
+
+# L2 regularization
+#x = Dense(256,kernel_regularizer=regularizers.l2(1e-5))(xl)  
+#x = Activation('relu')(x)
+#x = Dense(256,kernel_regularizer=regularizers.l2(1e-5))(x)  
+#x = Activation('relu')(x)
+
+# Dropout regularization
+x = Dense(256)(xl)
 x = Activation('relu')(x)
-x = Dense(256)(x)  
+x = Dropout(0.5)(x)
+x = Dense(256)(x)
 x = Activation('relu')(x)
+x = Dropout(0.5)(x)
+
 xo = Dense(num_classes, name="y")(x)
 
 #xo = Dense(num_classes, name="y")(xl) this is when just using one layer
@@ -65,7 +78,10 @@ def generate_unique_logpath(logdir, raw_run_name):
                         return log_path
                 i = i + 1
 run_name = "linear"
-logpath = generate_unique_logpath("./logs_linear2", run_name)
+#logpath = generate_unique_logpath("./logs_linear", run_name)
+#logpath = generate_unique_logpath("./logs_linear1", run_name)
+logpath = generate_unique_logpath("./logs_linear3", run_name)
+
 tbcb = TensorBoard(log_dir=logpath)
 checkpoint_filepath = os.path.join(logpath,  "best_model.h5")
 checkpoint_cb = ModelCheckpoint(checkpoint_filepath, save_best_only=True)
